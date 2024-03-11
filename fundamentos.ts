@@ -187,3 +187,82 @@ function algumaCoisa(x: unknown): void {
 
 algumaCoisa('10')
 algumaCoisa(true)
+
+// NEVER
+function showError(msgERROR: string):
+never {
+    throw new Error (msgERROR)
+}
+
+//showError('Erro no código')
+
+// SPREAD e REST no JS
+
+let umArray = [1, 2, 3, 4, 5]
+let umNovoArray = [...umArray, 6, 7, 8, 9, 10]
+console.log(umNovoArray)
+
+function umaFuncao(...a:number[]){
+    console.log(a)
+}
+
+umaFuncao(1, 2, 3, 4, 5, 6)
+umaFuncao(1, 2)
+
+// DESTRUCTURING COM PARAMENTROS DE OBJETOS
+function showProdutos({nome, preco}:{nome:string, preco:number}):string{
+    return `o nome do produto é: ${nome} e o preço é: ${preco}`
+}
+
+const camisa = {
+    nome: 'Camisa de algodão',
+    preco: 39.90
+}
+
+console.log(showProdutos(camisa))
+
+// READONLY 
+const meuReadonly : string[][] = [['Paulo']]
+//meuReadonly.push(['Junior']) não funciona
+// obs: toda interface deve iniciar com letra maiuscula
+interface Carro {
+   readonly marca: string,
+    modelo: String,
+    qtdPneus:number,
+}
+
+const fusca: Carro = {
+    marca:'VW',
+    modelo:'fusca 1600',
+    qtdPneus: 4,
+}
+
+//fusca.marca = 'Ford'
+console.log(fusca.marca)
+
+// OPCIONAL EM INTERFACES
+interface NewUser {
+    email: string,
+    senha: string | number,
+    regra?: string
+}
+function showUserDetails(newUser: NewUser): string {
+    return `Seu e-mail é ${newUser.email} sua senha é ${newUser.senha} e sua regra de acesso é: ${newUser.regra ? newUser.regra : 'SEM REGRA'}`
+}
+
+const user10: NewUser = {
+    email: 'jota@teste.com.br',
+    senha: 102045956,
+    regra: 'gerente'
+}
+
+const user11: NewUser = {
+    email: 'convidado@teste.com.br',
+    senha: 'sem senha',
+    
+}
+console.log(showUserDetails(user10))
+console.log(showUserDetails(user11))
+
+
+
